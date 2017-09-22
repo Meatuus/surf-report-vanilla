@@ -72,7 +72,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_locations__ = __webpack_require__(1);
 
 
-console.log('hi', __WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][0]);
+const surfForecast = document.querySelector('.surf-forecast');
+const location = document.querySelector('.surf-conditions');
+
+const swell = document.getElementsByClassName('swell');
+const wind = document.getElementsByClassName('wind');
+const temp = document.getElementsByClassName('temp');
+
+if (__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */].length > 0) {
+
+  // location.innerHTML = '<h5><em>test</em></h5>';
+  // let x = document.createElement("li");
+  // location.appendChild(x);
+
+  // conditions.forEach((location) => {
+  //   let x = document.createElement("li");
+  //   // x.innerHTML = "<em>location</em>";
+  //   console.log(location.timestamp);
+  //   // location.after(x);
+  //   console.log(location.typeOf);
+  // });
+  for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */].length; i++) {
+    swell[i].innerHTML = `<h4>Min Swell: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.minBreakingHeight} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.unit}</h4><h4>Max Swell: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.maxBreakingHeight} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.unit}</h4><h4>Swell Direction: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.components.combined.compassDirection}</h4>`;
+
+    wind[i].innerHTML = `<h4>Wind Speed: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].wind.speed} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].wind.unit}</h4><h4>Direction: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].wind.compassDirection}`;
+
+    temp[i].innerHTML = `<h4>Temperature: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].condition.temperature} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].condition.unit}</h4>`;
+  }
+}
 
 /***/ }),
 /* 1 */
@@ -80,7 +107,7 @@ console.log('hi', __WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default *
 
 "use strict";
 const conditions = [{
-  timestamp: 1366902000,
+  timestamp: 1366900000,
   localTimestamp: 1366902000,
   issueTimestamp: 1366848000,
   fadedRating: 0,
@@ -88,7 +115,7 @@ const conditions = [{
   swell: {
     minBreakingHeight: 1,
     absMinBreakingHeight: 1.06,
-    maxBreakingHeight: 2,
+    maxBreakingHeight: 1,
     absMaxBreakingHeight: 1.66,
     unit: "ft",
     components: {
@@ -140,15 +167,15 @@ const conditions = [{
     sst: "http://cdn.magicseaweed.com/sst/750/1-1366902000-10.gif"
   }
 }, {
-  timestamp: 1366902000,
+  timestamp: 1366905000,
   localTimestamp: 1366902000,
   issueTimestamp: 1366848000,
   fadedRating: 0,
   solidRating: 0,
   swell: {
-    minBreakingHeight: 1,
-    absMinBreakingHeight: 1.06,
-    maxBreakingHeight: 2,
+    minBreakingHeight: 2,
+    absMinBreakingHeight: 2.06,
+    maxBreakingHeight: 4,
     absMaxBreakingHeight: 1.66,
     unit: "ft",
     components: {

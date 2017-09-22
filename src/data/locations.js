@@ -1,6 +1,6 @@
 const conditions = [
   {
-    timestamp: 1366902000,
+    timestamp: 1366900000,
     localTimestamp: 1366902000,
     issueTimestamp: 1366848000,
     fadedRating: 0,
@@ -8,7 +8,7 @@ const conditions = [
     swell: {
       minBreakingHeight: 1,
       absMinBreakingHeight: 1.06,
-      maxBreakingHeight: 2,
+      maxBreakingHeight: 1,
       absMaxBreakingHeight: 1.66,
       unit: "ft",
       components: {
@@ -61,15 +61,15 @@ const conditions = [
     }
   },
   {
-    timestamp: 1366902000,
+    timestamp: 1366905000,
     localTimestamp: 1366902000,
     issueTimestamp: 1366848000,
     fadedRating: 0,
     solidRating: 0,
     swell: {
-      minBreakingHeight: 1,
-      absMinBreakingHeight: 1.06,
-      maxBreakingHeight: 2,
+      minBreakingHeight: 2,
+      absMinBreakingHeight: 2.06,
+      maxBreakingHeight: 4,
       absMaxBreakingHeight: 1.66,
       unit: "ft",
       components: {
