@@ -19,32 +19,32 @@ Promise.all([
   axios.get("http://localhost:3000/locationTwo"),
   axios.get("http://localhost:3000/locationThree")
 ]).then((res) => {
-  console.log("test");
-  console.log(res);
+  conditionsOne = res[0].data;
+  conditionsTwo = res[1].data;
+  conditionsThree = res[2].data;
+  currentConditions([conditionsOne, conditionsTwo, conditionsThree])
 })
 
-// loadCommentsFromServer() {
-//   Promise.all([
-//     axios.get(this.props.urlFirst),
-//     axios.get(this.props.urlSecond),
-//     axios.get(this.props.urlThird)
-//   ]).then((res) => {
-//     this.setState({
-//       conditionsOne: res[0].data,
-//       conditionsTwo: res[1].data,
-//       conditionsThree: res[2].data,
-//       loading: false,
-//     });
-//   });
-// }
+let currentConditionsAll = [];
 
-if (conditions.length > 0) {
-  for (var i = 0; i < conditions.length; i++) {
-    swell[i].innerHTML = `<h4>Min Swell: ${conditions[i].swell.minBreakingHeight} ${conditions[i].swell.unit}</h4><h4>Max Swell: ${conditions[i].swell.maxBreakingHeight} ${conditions[i].swell.unit}</h4><h4>Swell Direction: ${conditions[i].swell.components.combined.compassDirection}</h4>`;
+function currentConditions(allConditions) {
+  let date = (Date.now()/1000);
+  allConditions.forEach(function(locationConditions) {
+    let currentCondition = locationConditions.filter(timeslot => timeslot.timestamp > date);
+    currentConditionsAll.push(currentCondition[0]);
+  })
+  current(currentConditionsAll);
+}
 
-    wind[i].innerHTML = `<h4>Wind Speed: ${conditions[i].wind.speed} ${conditions[i].wind.unit}</h4><h4>Direction: ${conditions[i].wind.compassDirection}`;
+function current(location) {
+  if (location.length > 0) {
+    for (var i = 0; i < location.length; i++) {
+      swell[i].innerHTML = `<h4>Min Swell: ${location[i].swell.minBreakingHeight} ${location[i].swell.unit}</h4><h4>Max Swell: ${location[i].swell.maxBreakingHeight} ${location[i].swell.unit}</h4><h4>Swell Direction: ${location[i].swell.components.combined.compassDirection}</h4>`;
 
-    temp[i].innerHTML = `<h4>Temperature: ${conditions[i].condition.temperature} ${conditions[i].condition.unit}</h4>`;
+      wind[i].innerHTML = `<h4>Wind Speed: ${location[i].wind.speed} ${location[i].wind.unit}</h4><h4>Direction: ${location[i].wind.compassDirection}`;
+
+      temp[i].innerHTML = `<h4>Temperature: ${location[i].condition.temperature} ${location[i].condition.unit}</h4>`;
+    }
   }
 }
 

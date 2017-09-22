@@ -959,32 +959,32 @@ let conditionsTwo = __WEBPACK_IMPORTED_MODULE_1__data_baseData__["a" /* default 
 let conditionsThree = __WEBPACK_IMPORTED_MODULE_1__data_baseData__["a" /* default */];
 
 Promise.all([__WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationOne"), __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationTwo"), __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationThree")]).then(res => {
-  console.log("test");
-  console.log(res);
+  conditionsOne = res[0].data;
+  conditionsTwo = res[1].data;
+  conditionsThree = res[2].data;
+  currentConditions([conditionsOne, conditionsTwo, conditionsThree]);
 });
 
-// loadCommentsFromServer() {
-//   Promise.all([
-//     axios.get(this.props.urlFirst),
-//     axios.get(this.props.urlSecond),
-//     axios.get(this.props.urlThird)
-//   ]).then((res) => {
-//     this.setState({
-//       conditionsOne: res[0].data,
-//       conditionsTwo: res[1].data,
-//       conditionsThree: res[2].data,
-//       loading: false,
-//     });
-//   });
-// }
+let currentConditionsAll = [];
 
-if (__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */].length > 0) {
-  for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */].length; i++) {
-    swell[i].innerHTML = `<h4>Min Swell: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.minBreakingHeight} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.unit}</h4><h4>Max Swell: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.maxBreakingHeight} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.unit}</h4><h4>Swell Direction: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].swell.components.combined.compassDirection}</h4>`;
+function currentConditions(allConditions) {
+  let date = Date.now() / 1000;
+  allConditions.forEach(function (locationConditions) {
+    let currentCondition = locationConditions.filter(timeslot => timeslot.timestamp > date);
+    currentConditionsAll.push(currentCondition[0]);
+  });
+  current(currentConditionsAll);
+}
 
-    wind[i].innerHTML = `<h4>Wind Speed: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].wind.speed} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].wind.unit}</h4><h4>Direction: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].wind.compassDirection}`;
+function current(location) {
+  if (location.length > 0) {
+    for (var i = 0; i < location.length; i++) {
+      swell[i].innerHTML = `<h4>Min Swell: ${location[i].swell.minBreakingHeight} ${location[i].swell.unit}</h4><h4>Max Swell: ${location[i].swell.maxBreakingHeight} ${location[i].swell.unit}</h4><h4>Swell Direction: ${location[i].swell.components.combined.compassDirection}</h4>`;
 
-    temp[i].innerHTML = `<h4>Temperature: ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].condition.temperature} ${__WEBPACK_IMPORTED_MODULE_0__data_locations__["a" /* default */][i].condition.unit}</h4>`;
+      wind[i].innerHTML = `<h4>Wind Speed: ${location[i].wind.speed} ${location[i].wind.unit}</h4><h4>Direction: ${location[i].wind.compassDirection}`;
+
+      temp[i].innerHTML = `<h4>Temperature: ${location[i].condition.temperature} ${location[i].condition.unit}</h4>`;
+    }
   }
 }
 
@@ -1177,7 +1177,7 @@ const conditions = [{
   }
 }];
 
-/* harmony default export */ __webpack_exports__["a"] = (conditions);
+/* unused harmony default export */ var _unused_webpack_default_export = (conditions);
 
 /***/ }),
 /* 10 */
