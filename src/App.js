@@ -1,14 +1,12 @@
 import conditions from './data/locations';
 import baseData from './data/baseData';
 import axios from 'axios';
-// var request = require('../request');
 
-// const surfForecast = document.querySelector('.surf-forecast');
-// const location = document.querySelector('.surf-conditions');
-
+const locationName = document.getElementsByClassName('location-name');
 const swell = document.getElementsByClassName('swell');
 const wind = document.getElementsByClassName('wind');
 const temp = document.getElementsByClassName('temp');
+const locations = ['Ballina', 'Byron Bay', 'Shelly Beach'];
 
 let conditionsOne = baseData;
 let conditionsTwo = baseData;
@@ -39,7 +37,9 @@ function currentConditions(allConditions) {
 function current(location) {
   if (location.length > 0) {
     for (var i = 0; i < location.length; i++) {
-      swell[i].innerHTML = `<h4>Min Swell: ${location[i].swell.minBreakingHeight} ${location[i].swell.unit}</h4><h4>Max Swell: ${location[i].swell.maxBreakingHeight} ${location[i].swell.unit}</h4><h4>Swell Direction: ${location[i].swell.components.combined.compassDirection}</h4>`;
+      locationName[i].innerText = locations[i];
+
+      swell[i].innerHTML = `<h4>Min Swell: ${location[i].swell.minBreakingHeight}     ${location[i].swell.unit}</h4><h4>Max Swell: ${location[i].swell.maxBreakingHeight} ${location[i].swell.unit}</h4><h4>Swell Direction: ${location[i].swell.components.combined.compassDirection}</h4>`;
 
       wind[i].innerHTML = `<h4>Wind Speed: ${location[i].wind.speed} ${location[i].wind.unit}</h4><h4>Direction: ${location[i].wind.compassDirection}`;
 
