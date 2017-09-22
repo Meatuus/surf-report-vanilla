@@ -4,6 +4,7 @@
   "main": "./src/App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "webpack && babel-node server.js",
     "start": "nodemon server.js"
   },
   "author": "",
@@ -16,6 +17,7 @@
     "webpack": "^3.6.0"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "express": "^4.15.4",
     "request": "^2.82.0"
   }
