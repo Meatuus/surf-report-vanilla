@@ -12,16 +12,22 @@ let conditionsOne = baseData;
 let conditionsTwo = baseData;
 let conditionsThree = baseData;
 
-Promise.all([
-  axios.get("http://localhost:3000/locationOne"),
-  axios.get("http://localhost:3000/locationTwo"),
-  axios.get("http://localhost:3000/locationThree")
-]).then((res) => {
-  conditionsOne = res[0].data;
-  conditionsTwo = res[1].data;
-  conditionsThree = res[2].data;
-  currentConditions([conditionsOne, conditionsTwo, conditionsThree])
-})
+const home = document.querySelector('.homepage_body');
+
+if (home) {
+  home.onload = function getLocationConditions() {
+    Promise.all([
+      axios.get("http://localhost:3000/locationOne"),
+      axios.get("http://localhost:3000/locationTwo"),
+      axios.get("http://localhost:3000/locationThree")
+    ]).then((res) => {
+      conditionsOne = res[0].data;
+      conditionsTwo = res[1].data;
+      conditionsThree = res[2].data;
+      currentConditions([conditionsOne, conditionsTwo, conditionsThree])
+    })
+  }
+}
 
 let currentConditionsAll = [];
 
@@ -47,5 +53,3 @@ function current(location) {
     }
   }
 }
-
-// TODO: call above fucntion only on home page

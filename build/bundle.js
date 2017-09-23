@@ -956,12 +956,18 @@ let conditionsOne = __WEBPACK_IMPORTED_MODULE_1__data_baseData__["a" /* default 
 let conditionsTwo = __WEBPACK_IMPORTED_MODULE_1__data_baseData__["a" /* default */];
 let conditionsThree = __WEBPACK_IMPORTED_MODULE_1__data_baseData__["a" /* default */];
 
-Promise.all([__WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationOne"), __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationTwo"), __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationThree")]).then(res => {
-  conditionsOne = res[0].data;
-  conditionsTwo = res[1].data;
-  conditionsThree = res[2].data;
-  currentConditions([conditionsOne, conditionsTwo, conditionsThree]);
-});
+const home = document.querySelector('.homepage_body');
+
+if (home) {
+  home.onload = function getLocationConditions() {
+    Promise.all([__WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationOne"), __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationTwo"), __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get("http://localhost:3000/locationThree")]).then(res => {
+      conditionsOne = res[0].data;
+      conditionsTwo = res[1].data;
+      conditionsThree = res[2].data;
+      currentConditions([conditionsOne, conditionsTwo, conditionsThree]);
+    });
+  };
+}
 
 let currentConditionsAll = [];
 
@@ -987,8 +993,6 @@ function current(location) {
     }
   }
 }
-
-// TODO: call above fucntion only on home page
 
 /***/ }),
 /* 9 */
