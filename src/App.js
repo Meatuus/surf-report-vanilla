@@ -11,11 +11,13 @@ const locations = ['Ballina', 'Byron Bay', 'Shelly Beach'];
 let conditionsOne = baseData;
 let conditionsTwo = baseData;
 let conditionsThree = baseData;
+var homepage = require('./components/Home');
+import {homepage} from './components/Home';
 
 const home = document.querySelector('.homepage_body');
 
 if (home) {
-  home.onload = function getLocationConditions() {
+  home.onload = function() {
     Promise.all([
       axios.get("http://localhost:3000/locationOne"),
       axios.get("http://localhost:3000/locationTwo"),
